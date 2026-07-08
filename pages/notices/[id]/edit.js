@@ -36,9 +36,9 @@ export default function EditNoticePage() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold text-gray-900 mb-4">Edit Notice</h1>
-      {loading && <p className="text-gray-500 text-sm">Loading...</p>}
-      {error && <p className="text-red-600 text-sm">{error}</p>}
+      <h1 className="text-2xl font-extrabold text-[#FBF9F4] mb-4">Edit Notice</h1>
+      {loading && <p className="text-[#FBF9F4]/60 text-sm">Loading...</p>}
+      {error && <p className="text-red-400 text-sm">{error}</p>}
       {notice && <NoticeForm initialData={notice} noticeId={notice.id} />}
     </Layout>
   );

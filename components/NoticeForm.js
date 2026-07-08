@@ -193,7 +193,7 @@ export default function NoticeForm({ initialData, noticeId }) {
         </button>
         <button
           type="button"
-          onClick={() => router.push('/notices')}
+          onClick={() => router.push({ pathname: '/notices', query: { toast: isEdit ? 'updated' : 'created' } })}
           className="border border-gray-300 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-50"
         >
           Cancel

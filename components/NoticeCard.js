@@ -1,15 +1,29 @@
 import Link from 'next/link';
+import { CATEGORY_COLORS } from '../lib/constants';
 
 export default function NoticeCard({ notice, onDeleteClick }) {
   const isUrgent = notice.priority === 'Urgent';
+  const pinColor = CATEGORY_COLORS[notice.category] || CATEGORY_COLORS.General;
   const formattedDate = new Date(notice.publishDate).toLocaleDateString('en-IN', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   });
 
+  // Deterministic slight tilt per notice so it doesn't shift on re-render
+  const rotation = ((notice.id * 37) % 5) - 2;
+
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-4 flex flex-col gap-3 sm:flex-row sm:items-start">
+    <div
+      className="relative bg-[#FBF9F4] rounded-md shadow-md border border-black/5 p-4 pt-6 flex flex-col gap-3 sm:flex-row sm:items-start transition-transform hover:-translate-y-0.5 hover:shadow-lg"
+      style={{ transform: `rotate(${rotation}deg)` }}
+    >
+      <span
+        className="absolute -top-2 left-4 w-4 h-4 rounded-full shadow-sm border-2 border-white"
+        style={{ backgroundColor: pinColor }}
+        aria-hidden="true"
+      />
+
       {notice.image && (
         <img
           src={notice.image}
@@ -24,12 +38,15 @@ export default function NoticeCard({ notice, onDeleteClick }) {
               Urgent
             </span>
           )}
-          <span className="bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded-full">
+          <span
+            className="text-xs font-semibold px-2 py-0.5 rounded-full"
+            style={{ backgroundColor: `${pinColor}22`, color: pinColor }}
+          >
             {notice.category}
           </span>
           <span className="text-xs text-gray-400">{formattedDate}</span>
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 wrap-break-word">{notice.title}</h3>
+        <h3 className="text-lg font-bold text-gray-900 wrap-break-word">{notice.title}</h3>
         <p className="text-gray-600 text-sm mt-1 whitespace-pre-wrap wrap-break-word">{notice.body}</p>
       </div>
       <div className="flex sm:flex-col gap-2 shrink-0">
