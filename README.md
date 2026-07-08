@@ -8,7 +8,7 @@ Built as part of a technical assignment to demonstrate full-stack engineering fu
 
 ## 🔗 Live Demo
 
-**App:** https://your-app.vercel.app
+**App:** https://notice-boardv1.vercel.app
 **Repository:** https://github.com/imrude16/notice-board
 
 ---
